@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chisa AI - Agricultural Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-seedling me-2"></i> Chisa AI
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 sidebar bg-light">
+                <div class="sidebar-header text-center py-4">
+                    <h4 class="text-success"><i class="fas fa-robot me-2"></i>Agri Assistant</h4>
+                    <p class="text-muted small">Your AI farming companion</p>
+                </div>
+
+                <ul class="nav nav-pills flex-column mb-4">
+                    <li class="nav-item">
+                        <a href="#chat-section" class="nav-link active" data-bs-toggle="tab">
+                            <i class="fas fa-comments me-2"></i>Chat Assistant
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#disease-section" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-disease me-2"></i>Disease Detection
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#calendar-section" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-calendar-alt me-2"></i>Crop Calendar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#irrigation-section" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-tint me-2"></i>Irrigation Guide
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#market-section" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-shopping-basket me-2"></i>Market Prices
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9 col-md-8 main-content">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="chat-section">
+                        <div class="welcome-card card border-0 shadow-sm mb-4">
+                            <div class="card-body text-center py-4">
+                                <h2 class="text-success mb-3">Welcome to Chisa AI Assistant</h2>
+                                <p class="text-muted lead">
+                                    Your intelligent farming companion. Get personalized advice in Tamil and English.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card border-0 shadow-sm chat-container">
+                                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-0"><i class="fas fa-robot me-2"></i>Chisa AI Assistant</h5>
+                                            <small class="opacity-75">Online - Ready to help</small>
+                                        </div>
+                                        <button class="btn btn-sm btn-light" id="tts-btn" title="Text to Speech">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="card-body p-0">
+                                        <div class="language-selector p-3 border-bottom">
+                                            <div class="btn-group w-100">
+                                                <button class="btn btn-outline-success active lang-btn" data-lang="ta">
+                                                    <i class="fas fa-language me-1"></i> தமிழ்
+                                                </button>
+                                                <button class="btn btn-outline-success lang-btn" data-lang="en">
+                                                    <i class="fas fa-language me-1"></i> English
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="chat-messages p-3" id="chat-messages">
+                                            <div class="message bot">
+                                                <div class="message-content">
+                                                    <strong>🌱 வணக்கம்!</strong> நான் உங்கள் வேளாண்மை உதவியாளர். நீங்கள் வேளாண்மை சம்பந்தப்பட்ட எந்த கேள்விகளையும் கேட்கலாம்.
+                                                    <div class="message-time" id="current-time">10:30 AM</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="quick-actions p-3 border-top">
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <button class="btn btn-outline-success w-100 quick-action-btn" data-question="நெல் பயிர்க்கு எந்த உரம் சிறந்தது?">
+                                                        <i class="fas fa-tint me-1"></i> நெல் உரம்
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-outline-success w-100 quick-action-btn" data-question="தக்காளி செடிகளில் பூச்சி கட்டுப்பாடு எப்படி?">
+                                                        <i class="fas fa-bug me-1"></i> பூச்சி கட்டுப்பாடு
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-outline-success w-100 quick-action-btn" data-question="மண்வளத்தை எப்படி மேம்படுத்துவது?">
+                                                        <i class="fas fa-seedling me-1"></i> மண்வளம்
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-outline-success w-100 quick-action-btn" data-question="கரும்பு அறுவடைக்கு சிறந்த நேரம் எப்போது?">
+                                                        <i class="fas fa-calendar me-1"></i> அறுவடை நேரம்
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-container p-3 border-top">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="user-input" placeholder="உங்கள் கேள்வியை இங்கே தட்டச்சு செய்க...">
+                                                <button class="btn btn-success" id="send-btn">
+                                                    <i class="fas fa-paper-plane"></i>
+                                                </button>
+                                                <button class="btn btn-outline-success" id="voice-btn">
+                                                    <i class="fas fa-microphone"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-header bg-success text-white">
+                                        <h6 class="mb-0"><i class="fas fa-camera me-2"></i>Image Analysis</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="upload-area text-center p-4 border rounded mb-3" id="image-upload-trigger" style="cursor: pointer;">
+                                            <i class="fas fa-cloud-upload-alt fa-2x text-success mb-2"></i>
+                                            <p class="mb-1">Upload Plant Image</p>
+                                            <small class="text-muted">Click to upload for analysis</small>
+                                        </div>
+                                        <input type="file" id="image-upload-input" accept="image/*" class="d-none">
+                                        <div id="image-preview"></div>
+                                        <button class="btn btn-success w-100 mb-2" id="analyze-image-btn" disabled>
+                                            <i class="fas fa-search me-1"></i> Analyze Image
+                                        </button>
+                                        <div id="image-status" class="text-center small text-muted"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="disease-section">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="mb-0"><i class="fas fa-disease me-2"></i>Plant Disease Detection</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light">
+                                            <div class="card-body text-center p-5">
+                                                <i class="fas fa-upload fa-3x text-success mb-3"></i>
+                                                <h5 class="text-success">Upload Plant Image</h5>
+                                                <p class="text-muted">Upload an image of your plant to detect diseases and get treatment recommendations</p>
+
+                                                <form id="disease-upload-form" enctype="multipart/form-data">
+                                                    <div class="mb-3">
+                                                        <input type="file" class="form-control" id="disease-file-input" accept="image/png, image/jpeg" name="img" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success btn-lg w-100">
+                                                        <i class="fas fa-search me-2"></i> Detect Disease
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="disease-result" class="disease-result">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-leaf fa-3x mb-3"></i>
+                                                <h5>No Analysis Yet</h5>
+                                                <p>Upload a plant image to see disease analysis results</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="calendar-section">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Crop Calendar</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light h-100">
+                                            <div class="card-body">
+                                                <h5 class="text-success mb-4">Get Crop Calendar Information</h5>
+                                                <form id="crop-calendar-form">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Select Crop</label>
+                                                        <select class="form-select" id="crop-type" required>
+                                                            <option value="">Choose crop...</option>
+                                                            <option value="rice">Rice (நெல்)</option>
+                                                            <option value="sugarcane">Sugarcane (கரும்பு)</option>
+                                                            <option value="tomato">Tomato (தக்காளி)</option>
+                                                            <option value="onion">Onion (வெங்காயம்)</option>
+                                                            <option value="potato">Potato (உருளைக்கிழங்கு)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Language</label>
+                                                        <select class="form-select" id="calendar-language">
+                                                            <option value="ta">Tamil (தமிழ்)</option>
+                                                            <option value="en">English</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success w-100">
+                                                        <i class="fas fa-calendar me-2"></i> Get Calendar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="calendar-result" class="calendar-result">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-calendar fa-3x mb-3"></i>
+                                                <h5>Crop Calendar Information</h5>
+                                                <p>Select a crop to see its calendar details</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="irrigation-section">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="mb-0"><i class="fas fa-tint me-2"></i>Irrigation Guide</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light h-100">
+                                            <div class="card-body">
+                                                <h5 class="text-success mb-4">Get Irrigation Guide</h5>
+                                                <form id="irrigation-guide-form">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Crop Type</label>
+                                                        <select class="form-select" id="irrigation-crop" required>
+                                                            <option value="">Choose crop...</option>
+                                                            <option value="rice">Rice (நெல்)</option>
+                                                            <option value="sugarcane">Sugarcane (கரும்பு)</option>
+                                                            <option value="tomato">Tomato (தக்காளி)</option>
+                                                            <option value="onion">Onion (வெங்காயம்)</option>
+                                                            <option value="potato">Potato (உருளைக்கிழங்கு)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Soil Type</label>
+                                                        <select class="form-select" id="soil-type" required>
+                                                            <option value="">Choose soil type...</option>
+                                                            <option value="clay">Clay Soil (களிமண்)</option>
+                                                            <option value="alluvial">Alluvial Soil (வண்டல் மண்)</option>
+                                                            <option value="red">Red Soil (செம்மண்)</option>
+                                                            <option value="sandy">Sandy Soil (மணல் மண்)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Language</label>
+                                                        <select class="form-select" id="irrigation-language">
+                                                            <option value="ta">Tamil (தமிழ்)</option>
+                                                            <option value="en">English</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success w-100">
+                                                        <i class="fas fa-tint me-2"></i> Get Irrigation Guide
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="irrigation-result" class="irrigation-result">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-tint fa-3x mb-3"></i>
+                                                <h5>Irrigation Guide</h5>
+                                                <p>Select crop and soil type to get irrigation guide</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="market-section">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="mb-0"><i class="fas fa-shopping-basket me-2"></i>Market Prices</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light h-100">
+                                            <div class="card-body">
+                                                <h5 class="text-success mb-4">Get Market Prices</h5>
+                                                <form id="market-prices-form">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Select Crop</label>
+                                                        <select class="form-select" id="market-crop" required>
+                                                            <option value="">Choose crop...</option>
+                                                            <option value="rice">Rice (நெல்)</option>
+                                                            <option value="sugarcane">Sugarcane (கரும்பு)</option>
+                                                            <option value="tomato">Tomato (தக்காளி)</option>
+                                                            <option value="onion">Onion (வெங்காயம்)</option>
+                                                            <option value="potato">Potato (உருளைக்கிழங்கு)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">District (Optional)</label>
+                                                        <select class="form-select" id="district">
+                                                            <option value="">All Districts</option>
+                                                            <option value="chennai">Chennai</option>
+                                                            <option value="coimbatore">Coimbatore</option>
+                                                            <option value="madurai">Madurai</option>
+                                                            <option value="trichy">Trichy</option>
+                                                            <option value="salem">Salem</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Language</label>
+                                                        <select class="form-select" id="market-language">
+                                                            <option value="ta">Tamil (தமிழ்)</option>
+                                                            <option value="en">English</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success w-100">
+                                                        <i class="fas fa-search me-2"></i> Get Prices
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="market-result" class="market-result">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-chart-line fa-3x mb-3"></i>
+                                                <h5>Market Price Information</h5>
+                                                <p>Select a crop to see current market prices</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
